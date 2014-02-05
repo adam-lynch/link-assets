@@ -9,8 +9,11 @@
         "vinyl": "*"
     },
     "devDependencies": {
+        "mocha": "*",
+        "should": "*"
     },
     "scripts": {
+        "test": "mocha"
     },
     "repository": {
         "type": "git",

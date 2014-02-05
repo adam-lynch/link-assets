@@ -36,9 +36,9 @@ module.exports = function(fileName, options){
 
         if(docRoot){
             //build path to asset using baseHref and other mapping rules
-            var regex = new RegExp('^(' + docRoot + ')?(.*?)$');
+            var regex = new RegExp('^(' + docRoot + ')?/?(.*?)$');
 
-            link = regex.exec(file.path)[1];//path relative to doc root
+            link = regex.exec(file.path)[2];//path relative to doc root
         }
         else {
             link = path.basename(file.path);
@@ -58,7 +58,7 @@ module.exports = function(fileName, options){
             cwd: firstFile.cwd,
             base: firstFile.base,
             path: path.join(firstFile.base, fileName),
-            contents: new Buffer(links.join(options.linkBreaks && '\n' || ''))
+            contents: new Buffer(links.join(options.lineBreaks && '\n' || ''))
         });
 
         this.emit('data', includeFile);
