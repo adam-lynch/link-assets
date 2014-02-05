@@ -8,7 +8,7 @@
 </tr>
 <tr>
 <td>Description</td>
-<td>Spits out an HTML fragment file with links to any given assets</td>
+<td>Spits out a file containing HTML links/scripts for each of the assets given</td>
 </tr>
 <tr>
 <td>Node Version</td>
