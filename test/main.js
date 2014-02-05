@@ -226,5 +226,54 @@ describe('link-assets', function() {
             stream.write(fakeFile2);
             stream.end();
         });
+
+        it('should bust cache with current time if told', function(done){
+
+            var projectRoot = path.resolve('./'),
+                testDirectory = path.join(projectRoot, 'test');
+
+            var stubbedTime = 12345;
+            Date = function(){
+                return {
+                    getTime: function(){
+                        return stubbedTime;
+                    }
+                }
+            };
+
+            var stream = linkAssets('styles.html', {
+                bustCache: true
+            });
+
+            var fakeFile1 = new File({
+                cwd: projectRoot,
+                base: testDirectory,
+                path: path.join(testDirectory, 'a.css'),
+                contents: new Buffer("p {color:red}")
+            });
+
+            var fakeFile2 = new File({
+                cwd: projectRoot,
+                base: testDirectory,
+                path: path.join(testDirectory, 'b.css'),
+                contents: new Buffer(".btn {padding: 8px 12px;}")
+            });
+
+            stream.on('data', function(newFile){
+                should.exist(newFile);
+                should.exist(newFile.path);
+                should.exist(newFile.relative);
+                should.exist(newFile.contents);
+
+                newFile.relative.should.equal("styles.html");
+                String(newFile.contents).should.equal('<link rel="stylesheet" href="a.css?f=' + stubbedTime + '"><link rel="stylesheet" href="b.css?f=' + stubbedTime + '">');
+                Buffer.isBuffer(newFile.contents).should.equal(true);
+                done();
+            });
+
+            stream.write(fakeFile1);
+            stream.write(fakeFile2);
+            stream.end();
+        });
     });
 });

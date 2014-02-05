@@ -15,15 +15,20 @@ module.exports = function(fileName, options){
     var firstFile = null;
     var links = [];
     var assetTypeBoilerplateDict = {
-        'css': {
-            beforeURL: '<link rel="stylesheet" href="',
-            afterURL: '"' + selfCloseSlash + '>'
+            'css': {
+                beforeURL: '<link rel="stylesheet" href="',
+                afterURL: '"' + selfCloseSlash + '>'
+            },
+            'js': {
+                beforeURL: '<script src="',
+                afterURL: '"></script>'
+            }
         },
-        'js': {
-            beforeURL: '<script src="',
-            afterURL: '"></script>'
-        }
-    };
+        queryString = '';
+
+    if(options.bustCache){
+        queryString = '?f=' + new Date().getTime();
+    }
 
     function bufferContents(file){
         if (file.isNull()) return; // ignore
@@ -47,7 +52,7 @@ module.exports = function(fileName, options){
         //output tag(s)
         var linkBoilerplate = assetTypeBoilerplateDict[extension.toLowerCase()];
         if(linkBoilerplate){
-            links.push(linkBoilerplate.beforeURL + link + linkBoilerplate.afterURL);
+            links.push(linkBoilerplate.beforeURL + link + queryString + linkBoilerplate.afterURL);
         }
     }
 
