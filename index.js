@@ -3,14 +3,16 @@ var os = require('os');
 var path = require('path');
 var File = require('vinyl');
 
-module.exports = function(options){
+module.exports = function(fileName, options){
     var pluginName = 'link-assets';
+    if (!fileName) throw new Error(pluginName,  'Missing fileName parameter for ' + pluginName);
+
 
     options = options || {};
-    var baseHref = options.baseHref || '';
-    var basePath = options.basePath ? basePath : '';//TODO: better mapping between files and URLs
+    var docRoot = options.docRoot ? path.resolve(options.docRoot) : '';
     var selfCloseSlash = options.selfCloseEmptyElements ? '/' : '';
 
+    var firstFile = null;
     var links = [];
     var assetTypeBoilerplateDict = {
         'css': {
@@ -26,24 +28,40 @@ module.exports = function(options){
     function bufferContents(file){
         if (file.isNull()) return; // ignore
         if (file.isStream()) return this.emit('error', new Error(pluginName,  'Streaming not supported'));
+        if(!firstFile) firstFile = file;
 
         //get extension
-        var extension = file.path.split('.').pop();
+        var extension = path.extname(file.path).substr(1),
+            link = null;
 
-        //build path to asset using baseHref and other mapping rules
-        var link = baseHref + basePath;//TODO use path.resolve or whatever it's called and append base filename
+        if(docRoot){
+            //build path to asset using baseHref and other mapping rules
+            var regex = new RegExp('^(' + docRoot + ')?(.*?)$');
+
+            link = regex.exec(file.path)[1];//path relative to doc root
+        }
+        else {
+            link = path.basename(file.path);
+        }
 
         //output tag(s)
         var linkBoilerplate = assetTypeBoilerplateDict[extension.toLowerCase()];
-        links.push(linkBoilerplate.beforeURL + link + linkBoilerplate.afterURL);
+        if(linkBoilerplate){
+            links.push(linkBoilerplate.beforeURL + link + linkBoilerplate.afterURL);
+        }
     }
 
     function endStream(){
-        if (!buffer.length) this.emit('end');
+        if (!links.length) this.emit('end');
 
-        if(resultFileBuffers.length === 0) this.emit('end');
+        var includeFile = new File({
+            cwd: firstFile.cwd,
+            base: firstFile.base,
+            path: path.join(firstFile.base, fileName),
+            contents: new Buffer(links.join(options.linkBreaks && '\n' || ''))
+        });
 
-        this.data(links.join(options.linkBreaks && '\n' || ''));
+        this.emit('data', includeFile);
         this.emit('end');
     }
 
