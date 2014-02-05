@@ -1,4 +1,4 @@
-# link-assets v0.0.1 [![Build Status](https://travis-ci.org/adam-lynch/link-assets.png)](https://travis-ci.org/adam-lynch/link-assets)
+# link-assets v0.0.2 [![Build Status](https://travis-ci.org/adam-lynch/link-assets.png)](https://travis-ci.org/adam-lynch/link-assets)
 
 ## Information
 
@@ -38,7 +38,10 @@ gulp.task('default', ['include']);
 <th>Property</th><th>Default</th><th>Description</th>
 </tr>
 <tr>
-<td>docRoot</td><td>None</td><td>Path to document root so only relative paths to assets are written out</td>
+<td>bustCache</td><td>false</td><td>A time-based query string will be appended</td>
+</tr>
+<tr>
+<td>docRoot</td><td>None</td><td>Path to document root so only relative paths to assets are written out. If none is passed, just the filenames are output.</td>
 </tr>
 <tr>
 <td>lineBreaks</td><td>false</td><td>Splits asset references onto separate lines</td>
