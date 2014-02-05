@@ -1,0 +1,32 @@
+{
+    "name": "link-assets",
+    "version": "0.0.1",
+    "homepage": "http://github.com/adam-lynch/link-assets",
+    "description": "Spits out an HTML fragement file with links to any given assets",
+    "main": "./index.js",
+    "dependencies": {
+        "through": "~2.3.4",
+        "vinyl": "*"
+    },
+    "devDependencies": {
+    },
+    "scripts": {
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/adam-lynch/link-assets.git"
+    },
+    "keywords": [
+        "gulpplugin",
+        "css",
+        "combine"
+    ],
+    "author": "Adam Lynch <adam@teamwork.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "http://github.com/adam-lynch/link-assets/issues"
+    },
+    "engines": {
+        "node": ">=0.8"
+    }
+}
