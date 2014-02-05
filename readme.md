@@ -16,29 +16,17 @@
 </tr>
 </table>
 
-## Example usage with [Gulp](http://github.com/gulpjs/gulp) and [link-assets](http://github.com/adam-lynch/link-assets)
+## Example usage with [Gulp](http://github.com/gulpjs/gulp)
 
 ```js
 var gulp = require('gulp');
-var combineCSS = require('link-assets');
-var linkAssets = require('link-assets');
+var linkAssets = require('./');
 
-gulp.task('styles', function() {
+gulp.task('include', function () {
     gulp.src('./css/*.css')
-        .pipe(combineCSS({
-            lengthLimit: 256//2KB
-        }))
-        .pipe(gulp.dest('./combinedCSS'))
-        .pipe(linkAssets({
-            bustCache: true
-        }))
-        .pip(gulp.dest('./includes/styles.html'));
+        .pipe(linkAssets('styles.html'))
+        .pipe(gulp.dest('./includes/'));
 });
 
-gulp.task('default', ['styles']);
-
-// Rerun the task when a file changes
-gulp.task('watch', function () {
-  gulp.watch('./css/*.css', ['styles']);
-});
+gulp.task('default', ['include']);
 ```
