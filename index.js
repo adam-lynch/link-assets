@@ -9,7 +9,7 @@ module.exports = function(fileName, options){
 
 
     options = options || {};
-    var docRoot = options.docRoot ? path.resolve(options.docRoot) : '';
+    var docRoot = options.docRoot || '';
     var selfCloseSlash = options.selfCloseEmptyElements ? '/' : '';
 
     var firstFile = null;
