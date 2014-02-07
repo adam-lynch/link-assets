@@ -151,7 +151,7 @@ describe('link-assets', function() {
             stream.end();
         });
 
-        it('should be able to create links relatives to document root passed as absolute path', function(done){
+        it('should be able to create links relative to document root passed as absolute path', function(done){
             var stream = linkAssets('styles.html', {
                 docRoot: '/home/adam'
             });
@@ -187,7 +187,83 @@ describe('link-assets', function() {
             stream.end();
         });
 
-        it('should be able to create links relatives to document root passed as relative path', function(done){
+        it('should be able to create links relative to document root passed as absolute Windows path', function(done){
+            var stream = linkAssets('styles.html', {
+                docRoot: 'C:\\a\\b'
+            });
+
+            var fakeFile1 = new File({
+                cwd: "C:\\",
+                base: "C:\\a\\b\\test",
+                path: "C:\\a\\b\\test\\file.css",
+                contents: new Buffer("p {color:red}")
+            });
+
+            var fakeFile2 = new File({
+                cwd: "C:\\",
+                base: "C:\\a\\b\\test",
+                path: "C:\\a\\b\\test\\buttons.css",
+                contents: new Buffer(".btn {padding: 8px 12px;}")
+            });
+
+            stream.on('data', function(newFile){
+                should.exist(newFile);
+                should.exist(newFile.path);
+                should.exist(newFile.relative);
+                should.exist(newFile.contents);
+
+                newFile.relative.should.equal("styles.html");
+                String(newFile.contents).should.equal('<link rel="stylesheet" href="test/file.css"><link rel="stylesheet" href="test/buttons.css">');
+                Buffer.isBuffer(newFile.contents).should.equal(true);
+                done();
+            });
+
+            stream.write(fakeFile1);
+            stream.write(fakeFile2);
+            stream.end();
+        });
+
+        it('should be able to create links relative to document root passed as relative path', function(done){
+
+            var projectRoot = path.resolve('./'),
+                testDirectory = path.join(projectRoot, 'test');
+
+            var stream = linkAssets('styles.html', {
+                docRoot: './'
+            });
+
+            var fakeFile1 = new File({
+                cwd: projectRoot,
+                base: testDirectory,
+                path: path.join(testDirectory, 'a.css'),
+                contents: new Buffer("p {color:red}")
+            });
+
+            var fakeFile2 = new File({
+                cwd: projectRoot,
+                base: testDirectory,
+                path: path.join(testDirectory, 'b.css'),
+                contents: new Buffer(".btn {padding: 8px 12px;}")
+            });
+
+            stream.on('data', function(newFile){
+                should.exist(newFile);
+                should.exist(newFile.path);
+                should.exist(newFile.relative);
+                should.exist(newFile.contents);
+
+                newFile.relative.should.equal("styles.html");
+                String(newFile.contents).should.equal('<link rel="stylesheet" href="test/a.css"><link rel="stylesheet" href="test/b.css">');
+                Buffer.isBuffer(newFile.contents).should.equal(true);
+                done();
+            });
+
+            stream.write(fakeFile1);
+            stream.write(fakeFile2);
+            stream.end();
+        });
+
+        it('should be able to create links relatives to document root passed as relative path on Windows', function(done){
 
             var projectRoot = path.resolve('./'),
                 testDirectory = path.join(projectRoot, 'test');
