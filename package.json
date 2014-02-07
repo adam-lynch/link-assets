@@ -1,6 +1,6 @@
 {
     "name": "link-assets",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "homepage": "http://github.com/adam-lynch/link-assets",
     "description": "Spits out an HTML fragement file with links to any given assets",
     "main": "./index.js",
