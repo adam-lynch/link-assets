@@ -40,10 +40,7 @@ module.exports = function(fileName, options){
             link = null;
 
         if(docRoot){
-            //build path to asset using baseHref and other mapping rules
-            var regex = new RegExp('^(' + docRoot + ')?/?(.*?)$');
-
-            link = regex.exec(file.path)[2];//path relative to doc root
+            link = path.relative(docRoot, file.path).split(path.sep).join('/');
         }
         else {
             link = path.basename(file.path);

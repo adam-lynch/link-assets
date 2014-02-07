@@ -115,7 +115,7 @@ describe('link-assets', function() {
             stream.end();
         });
 
-        it('should break asset links onto separate linesif told', function(done){
+        it('should break asset links onto separate lines if told', function(done){
             var stream = linkAssets('styles.html', {
                 lineBreaks: true
             });
