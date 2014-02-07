@@ -40,7 +40,7 @@ module.exports = function(fileName, options){
             link = null;
 
         if(docRoot){
-            link = path.relative(docRoot, file.path).split(path.sep).join('/');
+            link = path.relative(docRoot, file.path);
         }
         else {
             link = path.basename(file.path);

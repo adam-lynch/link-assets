@@ -35,7 +35,7 @@ describe('link-assets', function() {
                 should.exist(newFile.contents);
 
                 newFile.relative.should.equal("styles.html");
-                String(newFile.contents).should.equal('<link rel="stylesheet" href="file.css"><link rel="stylesheet" href="buttons.css">');
+                newFile.contents.toString('utf8').should.equal('<link rel="stylesheet" href="file.css"><link rel="stylesheet" href="buttons.css">');
                 Buffer.isBuffer(newFile.contents).should.equal(true);
                 done();
             });
@@ -69,7 +69,7 @@ describe('link-assets', function() {
                 should.exist(newFile.contents);
 
                 newFile.relative.should.equal("scripts.html");
-                String(newFile.contents).should.equal('<script src="file.js"></script><script src="buttons.js"></script>');
+                newFile.contents.toString('utf8').should.equal('<script src="file.js"></script><script src="buttons.js"></script>');
                 Buffer.isBuffer(newFile.contents).should.equal(true);
                 done();
             });
@@ -105,7 +105,7 @@ describe('link-assets', function() {
                 should.exist(newFile.contents);
 
                 newFile.relative.should.equal("styles.html");
-                String(newFile.contents).should.equal('<link rel="stylesheet" href="file.css"/><link rel="stylesheet" href="buttons.css"/>');
+                newFile.contents.toString('utf8').should.equal('<link rel="stylesheet" href="file.css"/><link rel="stylesheet" href="buttons.css"/>');
                 Buffer.isBuffer(newFile.contents).should.equal(true);
                 done();
             });
@@ -141,7 +141,7 @@ describe('link-assets', function() {
                 should.exist(newFile.contents);
 
                 newFile.relative.should.equal("styles.html");
-                String(newFile.contents).should.equal('<link rel="stylesheet" href="file.css">\n<link rel="stylesheet" href="buttons.css">');
+                newFile.contents.toString('utf8').should.equal('<link rel="stylesheet" href="file.css">\n<link rel="stylesheet" href="buttons.css">');
                 Buffer.isBuffer(newFile.contents).should.equal(true);
                 done();
             });
@@ -177,7 +177,7 @@ describe('link-assets', function() {
                 should.exist(newFile.contents);
 
                 newFile.relative.should.equal("styles.html");
-                String(newFile.contents).should.equal('<link rel="stylesheet" href="test/file.css"><link rel="stylesheet" href="test/buttons.css">');
+                newFile.contents.toString('utf8').should.equal('<link rel="stylesheet" href="test' + path.sep + 'file.css"><link rel="stylesheet" href="test' + path.sep + 'buttons.css">');
                 Buffer.isBuffer(newFile.contents).should.equal(true);
                 done();
             });
@@ -213,7 +213,7 @@ describe('link-assets', function() {
                 should.exist(newFile.contents);
 
                 newFile.relative.should.equal("styles.html");
-                String(newFile.contents).should.equal('<link rel="stylesheet" href="test/file.css"><link rel="stylesheet" href="test/buttons.css">');
+                newFile.contents.toString('utf8').should.equal('<link rel="stylesheet" href="test' + path.sep + 'file.css"><link rel="stylesheet" href="test' + path.sep + 'buttons.css">');
                 Buffer.isBuffer(newFile.contents).should.equal(true);
                 done();
             });
@@ -253,7 +253,7 @@ describe('link-assets', function() {
                 should.exist(newFile.contents);
 
                 newFile.relative.should.equal("styles.html");
-                String(newFile.contents).should.equal('<link rel="stylesheet" href="test/a.css"><link rel="stylesheet" href="test/b.css">');
+                newFile.contents.toString('utf8').should.equal('<link rel="stylesheet" href="test' + path.sep + 'a.css"><link rel="stylesheet" href="test' + path.sep + 'b.css">');
                 Buffer.isBuffer(newFile.contents).should.equal(true);
                 done();
             });
@@ -302,7 +302,7 @@ describe('link-assets', function() {
                 should.exist(newFile.contents);
 
                 newFile.relative.should.equal("styles.html");
-                String(newFile.contents).should.equal('<link rel="stylesheet" href="a.css?f=' + stubbedTime + '"><link rel="stylesheet" href="b.css?f=' + stubbedTime + '">');
+                newFile.contents.toString('utf8').should.equal('<link rel="stylesheet" href="a.css?f=' + stubbedTime + '"><link rel="stylesheet" href="b.css?f=' + stubbedTime + '">');
                 Buffer.isBuffer(newFile.contents).should.equal(true);
                 done();
             });
