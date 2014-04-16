@@ -51,3 +51,6 @@ gulp.task('default', ['include']);
 </tr>
 <tr>
 </table>
+
+### Notes
+- Forward slashes are always used no matter which platform.

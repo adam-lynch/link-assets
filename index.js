@@ -49,6 +49,8 @@ module.exports = function(fileName, options){
         //output tag(s)
         var linkBoilerplate = assetTypeBoilerplateDict[extension.toLowerCase()];
         if(linkBoilerplate){
+
+            link = link.replace('\\', '/');
             links.push(linkBoilerplate.beforeURL + link + queryString + linkBoilerplate.afterURL);
         }
     }
