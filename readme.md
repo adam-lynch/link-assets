@@ -1,4 +1,4 @@
-# link-assets v0.0.7 [![Build Status](https://travis-ci.org/adam-lynch/link-assets.png)](https://travis-ci.org/adam-lynch/link-assets)
+# link-assets v0.0.8 [![Build Status](https://travis-ci.org/adam-lynch/link-assets.png)](https://travis-ci.org/adam-lynch/link-assets)
 
 ## Information
 
