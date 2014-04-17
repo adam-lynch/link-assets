@@ -50,7 +50,7 @@ module.exports = function(fileName, options){
         var linkBoilerplate = assetTypeBoilerplateDict[extension.toLowerCase()];
         if(linkBoilerplate){
 
-            link = link.replace('\\', '/');
+            link = link.replace(/\\+/g, '/');
             links.push(linkBoilerplate.beforeURL + link + queryString + linkBoilerplate.afterURL);
         }
     }
