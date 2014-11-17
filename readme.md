@@ -1,20 +1,15 @@
-# link-assets v0.0.8 [![Build Status](https://travis-ci.org/adam-lynch/link-assets.png)](https://travis-ci.org/adam-lynch/link-assets)
+link-assets
+==========
 
-## Information
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Windows Build Status][appveyor-image]][appveyor-url] [![Dependency Status][depstat-image]][depstat-url] 
 
-<table>
-<tr> 
-<td>Package</td><td>link-assets</td>
-</tr>
-<tr>
-<td>Description</td>
-<td>Spits out a file containing HTML links/scripts for each of the assets given</td>
-</tr>
-<tr>
-<td>Node Version</td>
-<td>>= 0.8</td>
-</tr>
-</table>
+---
+
+## Installation
+
+```javascript
+npm install link-assets
+```
 
 ## Example usage with [Gulp](http://github.com/gulpjs/gulp)
 
@@ -54,3 +49,16 @@ gulp.task('default', ['include']);
 
 ### Notes
 - Forward slashes are always used no matter which platform.
+
+
+[npm-url]: https://npmjs.org/package/link-assets
+[npm-image]: http://img.shields.io/npm/v/link-assets.svg?style=flat
+
+[travis-url]: http://travis-ci.org/adam-lynch/link-assets
+[travis-image]: http://img.shields.io/travis/adam-lynch/link-assets.svg?style=flat
+
+[appveyor-url]: https://ci.appveyor.com/project/adam-lynch/link-assets/branch/master
+[appveyor-image]: https://ci.appveyor.com/api/projects/status/0pqag2cjjqa5h23w/branch/master?svg=true
+
+[depstat-url]: https://david-dm.org/adam-lynch/link-assets
+[depstat-image]: https://david-dm.org/adam-lynch/link-assets.svg?style=flat
